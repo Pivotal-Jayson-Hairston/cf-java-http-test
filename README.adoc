@@ -9,7 +9,6 @@ This is a trivial app used to demonstrate an app running on CF talking to CC on 
 ----
 $ ./gradlew clean assemble
 ----
-+
 
 == Deploy to Pivotal Cloud Foundry
 
