@@ -1,0 +1,26 @@
+= cf-java-http-test
+
+This is a trivial app used to demonstrate an app running on CF talking to CC on the same platform.
+
+== Build
+
+. Using Gradle, build and package the application:
++
+----
+$ ./gradlew clean assemble
+----
++
+
+== Deploy to Pivotal Cloud Foundry
+
+. Edit the `manifest.yml` file in the project to configure the details of the CF platform the app is running on.
+
+. Push the app to CF
++
+----
+$ cf push
+----
+
+== Test the Application
+
+. In a terminal window, run `cf logs cf-java-http-test` to view the logs of the app. The app will log the results of periodic calls to CC.

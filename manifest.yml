@@ -1,0 +1,13 @@
+---
+applications:
+- name: cf-java-http-test
+  memory: 1G
+  random-route: true
+  path: build/libs/cf-java-http-test-0.1.0.jar
+  env:
+#    CF_TARGET: https://api.cf.example.com
+#    CF_USERNAME: user
+#    CF_PASSWORD: password
+#    CF_TRUST_SELF_SIGNED_CERTS: false
+#    logging.level.org.apache.http.wire: DEBUG
+
