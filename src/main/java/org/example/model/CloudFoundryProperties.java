@@ -8,6 +8,10 @@ public class CloudFoundryProperties {
 	private boolean verbose;
 	private boolean debug;
 
+	public CloudFoundryProperties(String cfApi) {
+		this.target = cfApi;
+	}
+
 	public String getTarget() {
 		return target;
 	}

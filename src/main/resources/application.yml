@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: java-client
+    active: rest-template
 
 security:
   basic:
@@ -15,4 +15,4 @@ cf:
   verbose: true
 
 connection:
-  intervalMs: 300000
+  intervalMs: 365000
