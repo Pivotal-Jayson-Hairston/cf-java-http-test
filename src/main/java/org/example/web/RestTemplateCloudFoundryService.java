@@ -8,26 +8,24 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
 @Service
 @Profile("rest-template")
 public class RestTemplateCloudFoundryService implements CloudFoundryService {
 	private final CloudFoundryProperties properties;
-	private final List<RestTemplate> restTemplates;
+	private final RestTemplate restTemplate;
 
-	public RestTemplateCloudFoundryService(CloudFoundryProperties properties, List<RestTemplate> restTemplates) {
+	public RestTemplateCloudFoundryService(CloudFoundryProperties properties, RestTemplate restTemplate) {
 		this.properties = properties;
-		this.restTemplates = restTemplates;
+		this.restTemplate = restTemplate;
 	}
 
 	@Override
-	public CloudFoundryInfo getCloudFoundryInfo(int connectionIndex) {
-		return new CloudFoundryInfo(getInfo(connectionIndex));
+	public CloudFoundryInfo getCloudFoundryInfo() {
+		return new CloudFoundryInfo(getInfo());
 	}
 
-	private CloudInfo getInfo(int connectionIndex) {
-		return restTemplates.get(connectionIndex).getForObject(properties.getTarget() + "/v2/info", CloudInfo.class);
+	private CloudInfo getInfo() {
+		return restTemplate.getForObject(properties.getTarget() + "/v2/info", CloudInfo.class);
 	}
 
 	@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)

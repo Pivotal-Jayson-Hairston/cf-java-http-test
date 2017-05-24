@@ -12,20 +12,14 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 @Profile("java-client")
 public class JavaClientConfig {
 
 	@Bean
-	public List<CloudFoundryClient> cloudFoundryClient(CloudFoundryProperties cloudFoundryProperties) {
-		List<CloudFoundryClient> clients = new ArrayList<>();
-		for (int i = 0; i < cloudFoundryProperties.getConnectionCount(); i++) {
-			clients.add(getCloudFoundryClient(cloudFoundryProperties));
-		}
-		return clients;
+	public CloudFoundryClient cloudFoundryClient(CloudFoundryProperties cloudFoundryProperties) {
+		return getCloudFoundryClient(cloudFoundryProperties);
 	}
 
 	private CloudFoundryClient getCloudFoundryClient(CloudFoundryProperties cloudFoundryProperties) {

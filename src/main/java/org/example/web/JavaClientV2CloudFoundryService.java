@@ -8,24 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @Profile("java-client-v2")
 public class JavaClientV2CloudFoundryService implements CloudFoundryService {
-	private List<CloudFoundryClient> clients;
+	private CloudFoundryClient client;
 
 	@Autowired
-	public JavaClientV2CloudFoundryService(List<CloudFoundryClient> clients) {
-		this.clients = clients;
+	public JavaClientV2CloudFoundryService(CloudFoundryClient client) {
+		this.client = client;
 	}
 
-	public CloudFoundryInfo getCloudFoundryInfo(int connectionIndex) {
-		return new CloudFoundryInfo(getInfo(connectionIndex));
+	public CloudFoundryInfo getCloudFoundryInfo() {
+		return new CloudFoundryInfo(getInfo());
 	}
 
-	private GetInfoResponse getInfo(int connectionIndex) {
-		return clients.get(connectionIndex)
+	private GetInfoResponse getInfo() {
+		return client
 				.info()
 				.get(GetInfoRequest.builder().build())
 				.block();

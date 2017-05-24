@@ -7,7 +7,6 @@ public class CloudFoundryProperties {
 	private boolean trustSelfSignedCerts;
 	private boolean verbose;
 	private boolean debug;
-	private int connectionCount;
 
 	public String getTarget() {
 		return target;
@@ -55,13 +54,5 @@ public class CloudFoundryProperties {
 
 	public void setDebug(boolean debug) {
 		this.debug = debug;
-	}
-
-	public int getConnectionCount() {
-		return connectionCount;
-	}
-
-	public void setConnectionCount(int connectionCount) {
-		this.connectionCount = connectionCount;
 	}
 }

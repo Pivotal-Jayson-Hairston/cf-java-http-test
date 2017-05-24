@@ -13,4 +13,6 @@ management:
 cf:
   debug: false
   verbose: true
-  connectionCount: 4
+
+connection:
+  intervalMs: 300000
