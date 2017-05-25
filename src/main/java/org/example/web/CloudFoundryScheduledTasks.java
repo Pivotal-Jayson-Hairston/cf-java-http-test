@@ -21,7 +21,7 @@ public class CloudFoundryScheduledTasks {
 		this.objectMapper = objectMapper;
 	}
 
-	@Scheduled(fixedRateString = "${connection.intervalMs:300000}")
+	@Scheduled(initialDelayString = "${connection.delayMs:120000}", fixedRateString = "${connection.intervalMs:300000}")
 	public void cloudFoundryInfo() {
 		long startTime = logStart();
 		CloudFoundryInfo result = cloudFoundryService.getCloudFoundryInfo();

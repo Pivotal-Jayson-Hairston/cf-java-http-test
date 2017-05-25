@@ -9,10 +9,11 @@ security:
 management:
   security:
     enabled: false
-    
+
 cf:
   debug: false
   verbose: true
 
 connection:
-  intervalMs: 365000
+  intervalMs: 605000
+  delayMs: 120000
