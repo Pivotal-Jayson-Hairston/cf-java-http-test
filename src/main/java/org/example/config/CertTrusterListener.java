@@ -10,22 +10,27 @@ import java.net.URL;
 public class CertTrusterListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 	@Override
 	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-		String cfTarget = event.getEnvironment().getProperty("cf.target");
-		if (cfTarget != null) {
-			try {
-				URL cfTargetUrl = new URL(cfTarget);
-				String host = cfTargetUrl.getHost();
-				if ("https".equals(cfTargetUrl.getProtocol()) && host != null) {
-					int httpsPort = cfTargetUrl.getPort() > 0 ? cfTargetUrl.getPort() : 443;
-					try {
-						SslCertificateTruster.trustCertificate(host, httpsPort, 5000);
-					} catch (Exception e) {
-						System.err.println("trusting certificate at " + host + ":" + httpsPort + " failed due to " + e);
-						e.printStackTrace();
+		boolean trustApiCerts =
+				event.getEnvironment().getProperty("cf.trustApiCerts", Boolean.class, false);
+
+		if (trustApiCerts) {
+			String cfTarget = event.getEnvironment().getProperty("cf.target");
+			if (cfTarget != null) {
+				try {
+					URL cfTargetUrl = new URL(cfTarget);
+					String host = cfTargetUrl.getHost();
+					if ("https".equals(cfTargetUrl.getProtocol()) && host != null) {
+						int httpsPort = cfTargetUrl.getPort() > 0 ? cfTargetUrl.getPort() : 443;
+						try {
+							SslCertificateTruster.trustCertificate(host, httpsPort, 5000);
+						} catch (Exception e) {
+							System.err.println("trusting certificate at " + host + ":" + httpsPort + " failed due to " + e);
+							e.printStackTrace();
+						}
 					}
+				} catch (MalformedURLException e1) {
+					System.err.println("Cannot parse CF_TARGET '" + cfTarget + "' as a URL");
 				}
-			} catch (MalformedURLException e1) {
-				System.err.println("Cannot parse CF_TARGET '" + cfTarget + "' as a URL");
 			}
 		}
 	}

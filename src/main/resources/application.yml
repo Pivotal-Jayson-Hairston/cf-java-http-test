@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: rest-template
+    active: java-client
 
 security:
   basic:
@@ -13,7 +13,9 @@ management:
 cf:
   debug: false
   verbose: true
+  trustApiCerts: false
+  trustSelfSignedCerts: false
 
 connection:
-  intervalMs: 605000
-  delayMs: 120000
+  intervalMs: 10000
+  delayMs: 1000

@@ -4,6 +4,6 @@ applications:
   memory: 1G
   random-route: true
   path: build/libs/cf-java-http-test-0.1.0.jar
-  env:
-    logging.level.org.apache.http.wire: DEBUG
+#  env:
+#    logging.level.org.apache.http.wire: DEBUG
 
